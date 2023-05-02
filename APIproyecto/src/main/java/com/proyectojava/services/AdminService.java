@@ -18,6 +18,7 @@ import com.proyectojava.model.Producto;
 import com.proyectojava.model.ProductosTarea;
 import com.proyectojava.model.Tarea;
 import com.proyectojava.model.Usuario;
+import com.proyectojava.model.UsuarioTareas;
 
 @Service
 public class AdminService {
@@ -51,7 +52,26 @@ public class AdminService {
 		return b;
 	}
 
-	public boolean insertProducts(ProductosTarea productosTarea) {
+	public boolean addProducts(ProductosTarea productosTarea) {
+		boolean b = false;
+
+		final String sql_insert_all = "INSERT INTO productostareas (idtarea, idproducto) VALUES (?, ?)";
+		int totalFilasAfectadas = 0;
+		for (Producto p : productosTarea.getProductos()) {
+			int filasAfectadas = jdbcTemplate.update(sql_insert_all, productosTarea.getTarea().getIdTarea(),
+					p.getIdProducto());
+			totalFilasAfectadas += filasAfectadas;
+		}
+		if (productosTarea.getProductos().size() == totalFilasAfectadas) {
+			b = true;
+		} else {
+			b = false;
+		}
+
+		return b;
+	}
+
+	public boolean updateProducts(ProductosTarea productosTarea) {
 		boolean b = false;
 
 		final String sql_delete = "DELETE FROM productostareas WHERE idtarea=?;";
@@ -143,6 +163,61 @@ public class AdminService {
 		}
 
 		return tareas;
+	}
+
+	public List<UsuarioTareas> getAllUserTasks() {
+		String sql = "SELECT * FROM usuarios u LEFT JOIN tareas t ON u.idusuario = t.idusuario WHERE type = 2 ORDER BY u.idusuario";
+		List<UsuarioTareas> usuariosTareas = new ArrayList<>();
+
+		Map<Integer, List<Tarea>> mapTareas = new HashMap<>();
+
+		jdbcTemplate.query(sql, rs -> {
+			int idUsuario = rs.getInt("u.idusuario");
+
+			Usuario usuario = new Usuario();
+			usuario.setIdUser(idUsuario);
+			usuario.setUser(rs.getString("u.usuario"));
+			usuario.setPassword(rs.getString("u.passuser"));
+			usuario.setType(rs.getInt("u.type"));
+			usuario.setUserName(rs.getString("u.nombre_empleado"));
+
+			if (rs.getInt("t.idtarea") != 0) {
+				Tarea tarea = new Tarea();
+				tarea.setIdTarea(rs.getInt("t.idtarea"));
+				tarea.setDireccion(rs.getString("t.direccion"));
+				tarea.setIdUsuario(rs.getInt("t.idusuario"));
+				tarea.setFinalizada(rs.getBoolean("t.finalizada"));
+
+				List<Tarea> tareas = mapTareas.getOrDefault(idUsuario, new ArrayList<>());
+				tareas.add(tarea);
+				mapTareas.put(idUsuario, tareas);
+			}
+		});
+
+		mapTareas.forEach((idUsuario, tareas) -> {
+			Usuario usuario = getUser(idUsuario);
+			UsuarioTareas usuarioTareas = new UsuarioTareas(usuario, tareas);
+			usuariosTareas.add(usuarioTareas);
+		});
+
+		return usuariosTareas;
+	}
+	
+	public Usuario getUser(int userId) {
+
+		final String sql = "SELECT * FROM usuarios where idusuario = ?;";
+
+		List<Map<String, Object>> result = jdbcTemplate.queryForList(sql, userId);
+		Usuario usuario = new Usuario();
+		
+		for (Map<String, Object> row : result) {
+			usuario.setIdUser((int) row.get("idusuario"));
+			usuario.setUser((String) row.get("usuario"));
+			usuario.setPassword((String) row.get("passuser"));
+			usuario.setType((int) row.get("type"));
+		}
+
+		return usuario;
 	}
 
 	public int findUserIdWithFewestTasks(List<Tarea> tareas) {

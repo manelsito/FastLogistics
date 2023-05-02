@@ -30,7 +30,10 @@ button.addEventListener("click", (e) => {
         getUsertype(data)
           .then((respuesta) => {
             var usertype = respuesta;
-            if (usertype == 2) {
+            if(usertype == 1){
+              location.href = "../pages/admin.html";
+            }
+            else if (usertype == 2) {
               location.href = "../pages/tdluser.html";
             } else if (usertype == 3) {
               location.href = "../pages/cleanerscreen.html";

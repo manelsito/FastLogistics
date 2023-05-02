@@ -75,78 +75,40 @@ fetch("http://localhost:8080/getAllTasks")
     console.error("Error en la solicitud:", error);
   });
 
+//------------
+//BOTONES
+//------------
+
 botonEnviar.addEventListener("click", (e) => {
   if (verificarSeleccion()) {
-    console.log("verificao");
+    const productos = getProductosLista();
     if (direccionEscrita) {
-      console.log("direccion");
-      crearTarea();
+      const data = {
+        tarea: {
+          direccion: direccionInput.value,
+        },
+        productos,
+      };
+      anadirProductos(
+        "http://localhost:8080/insertTask",
+        data,
+        "Tarea añadida correctamente"
+      );
     } else {
-      añadirProductos();
+      const data = {
+        tarea: {
+          idTarea: selectorDireccion.value,
+        },
+        productos,
+      };
+      anadirProductos(
+        "http://localhost:8080/addProducts",
+        data,
+        "Productos añadidos correctamente"
+      );
     }
   }
 });
-
-function crearTarea() {
-  const productos = getProductosLista();
-
-  const data = {
-    tarea: {
-      direccion: direccionInput.value
-    },
-    productos
-  };
-
-  fetch("http://localhost:8080/insertTask", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json", // Establece el tipo de contenido a JSON
-    },
-    body: JSON.stringify(data), // Convierte el objeto de datos a una cadena JSON
-  })
-    .then((response) => {
-      if (response.ok) {
-        return response.json(); // Si la respuesta es exitosa, convierte la respuesta a JSON
-      } else {
-        throw new Error("Error en la solicitud POST"); // Maneja errores de la solicitud
-      }
-    })
-    .then((data) => {
-      if(data === true){
-        alert("Tarea añadida correctamente");
-      }
-    })
-    .catch((error) => {
-      console.error(error); // Maneja errores de la solicitud
-    });
-}
-
-function getProductosLista() {
-  let listaDeProductos = [];
-  const elementos = productos.getElementsByTagName("button");
-  for (let i = 0; i < elementos.length; i++) {
-    let producto = {
-      idProducto: elementos[i].value,
-    };
-    
-    listaDeProductos.push(producto);
-  }
-  
-
-  return listaDeProductos;
-}
-
-function verificarSeleccion() {
-  // Verificar si ambos selectores están seleccionados
-  if (
-    (getProductosLista().length > 0 && selectorDireccion.value == !"defecto") ||
-    (getProductosLista().length > 0 && direccionInput.value.trim().length > 0)
-  ) {
-    console.log("???");
-    return true;
-  }
-  return false;
-}
 
 let direccionEscrita = true;
 botonCambiar.addEventListener("click", (e) => {
@@ -173,6 +135,87 @@ selectorProducto.addEventListener("change", (evento) => {
   selectorProducto.value = "defecto";
 });
 
+//------------
+//FUNCIONES
+//------------
+
+function anadirProductos(url, data, mensaje) {
+  fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json", // Establece el tipo de contenido a JSON
+    },
+    body: JSON.stringify(data), // Convierte el objeto de datos a una cadena JSON
+  })
+    .then((response) => {
+      if (response.ok) {
+        return response.json(); // Si la respuesta es exitosa, convierte la respuesta a JSON
+      } else {
+        throw new Error("Error en la solicitud POST"); // Maneja errores de la solicitud
+      }
+    })
+    .then((data) => {
+      if (data === true) {
+        customAlert(mensaje);
+      }
+    })
+    .catch((error) => {
+      console.error(error); // Maneja errores de la solicitud
+    });
+}
+
+function getProductosLista() {
+  let listaDeProductos = [];
+  const elementos = productos.getElementsByTagName("button");
+  for (let i = 0; i < elementos.length; i++) {
+    let producto = {
+      idProducto: elementos[i].value,
+    };
+
+    listaDeProductos.push(producto);
+  }
+
+  return listaDeProductos;
+}
+
+function verificarSeleccion() {
+  // Verificar si ambos selectores están seleccionados
+  if (
+    (getProductosLista().length > 0 && selectorDireccion.selectedIndex !== 0) ||
+    (getProductosLista().length > 0 && direccionInput.value.trim().length > 0)
+  ) {
+    return true;
+  }
+  return false;
+}
+
 function borrarProducto(seleccion) {
   productos.removeChild(seleccion);
+}
+
+function customAlert(message) {
+  // Crear los elementos HTML de la ventana emergente
+  const overlay = document.createElement("div");
+  overlay.setAttribute("class", "custom-alert-overlay");
+  const dialog = document.createElement("div");
+  dialog.setAttribute("class", "custom-alert-dialog");
+  const content = document.createElement("div");
+  content.setAttribute("class", "custom-alert-content");
+  const button = document.createElement("button");
+  button.setAttribute("class", "custom-alert-button");
+
+  // Agregar contenido dinámico a la ventana emergente
+  content.textContent = message;
+  button.textContent = "Cerrar";
+
+  // Agregar los elementos HTML a la página
+  dialog.appendChild(content);
+  dialog.appendChild(button);
+  overlay.appendChild(dialog);
+  document.body.appendChild(overlay);
+
+  // Agregar un controlador de eventos para cerrar la ventana emergente cuando se hace clic en el botón
+  button.addEventListener("click", function () {
+    overlay.remove();
+  });
 }

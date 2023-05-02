@@ -15,9 +15,12 @@ header:after {
   clear: both;
 }
 body {
-  background-color: #53dfd1;
-  overflow-x: hidden;
+  background-image: url("../images/flores.jpg");
+  background-size: cover;
 }
+section::-webkit-scrollbar {
+  display: none;
+ }
 
 #cerrarSesion {
   position: fixed;
@@ -25,7 +28,7 @@ body {
   right: 20px;
   width: 60px;
   height: 60px;
-  background: #399b91;
+  background: #4d8aff;
   cursor: pointer;
   display: flex;
   justify-content: center;
@@ -55,9 +58,11 @@ body {
   width: 80%;
   margin-top: 10px;
   margin-bottom: 10px;
-  padding: 0;
-  border: none;
-  background-color: transparent;
+  padding: 10px;
+  border: solid black 2px;
+  opacity: 0.9;
+  border-radius: 30px;
+  background-color: #fbc5bd;
   cursor: pointer;
   font-size: 24px;
 }
@@ -78,7 +83,7 @@ body {
 } */
 
 #lista_tareas button:hover {
-  background-color: #ddd;
+  background-color: #ffddd8;
 }
 
 #lista_tareas button input {
@@ -88,8 +93,8 @@ body {
 #productos {
   height: 50vh;
   width: 40vw;
-  position: absolute;
-  top: 10%;
+  position: fixed;
+  top: 20%;
   left: 30%;
   display: flex;
   flex-direction: column;
@@ -99,7 +104,7 @@ body {
   border: 1px solid #4d82c4;
   border-radius: 5px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-  z-index: 2;
+  z-index: 1000;
 }
 
 #lista_productos {

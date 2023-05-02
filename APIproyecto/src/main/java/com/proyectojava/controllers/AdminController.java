@@ -15,6 +15,7 @@ import com.proyectojava.model.Producto;
 import com.proyectojava.model.ProductosTarea;
 import com.proyectojava.model.Tarea;
 import com.proyectojava.model.Usuario;
+import com.proyectojava.model.UsuarioTareas;
 import com.proyectojava.services.AdminService;
 
 @CrossOrigin(maxAge = 3600, origins = "*")
@@ -31,9 +32,15 @@ public class AdminController {
 	}
 	
 	@ResponseBody
-	@PostMapping("/updateProducts")
+	@PostMapping("/addProducts")
 	public boolean insertProducts(@RequestBody ProductosTarea productosTarea) {
-		return adminService.insertProducts(productosTarea);
+		return adminService.addProducts(productosTarea);
+	}
+	
+	@ResponseBody
+	@PostMapping("/updateProducts")
+	public boolean updateProducts(@RequestBody ProductosTarea productosTarea) {
+		return adminService.updateProducts(productosTarea);
 	}
 	
 	@PostMapping("/deleteTask/{taskId}")
@@ -56,6 +63,9 @@ public class AdminController {
 		return adminService.getAllTasks();
 	}
 	
-	
+	@GetMapping("/getAllUserTasks")
+	public List<UsuarioTareas> getAllUserTasks() {
+		return adminService.getAllUserTasks();
+	}
 
 }

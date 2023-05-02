@@ -166,3 +166,13 @@ COMMIT;
 
 select * from tareas;
 select * from productostareas;
+
+select tareas.idtarea, tareas.direccion, tareas.finalizada, usuarios.idusuario, usuarios.usuario
+from tareas join usuarios on tareas.idusuario = usuarios.idusuario;
+
+select count(idusuario)
+from usuarios
+where type=2;
+
+SELECT * FROM usuarios u LEFT JOIN tareas t ON u.idusuario = t.idusuario WHERE type = 2 ORDER BY u.idusuario;
+ 

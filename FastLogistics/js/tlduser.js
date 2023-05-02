@@ -94,6 +94,8 @@ function clickLi(element) {
       return response.json(); // Parsear la respuesta como JSON
     })
     .then((data) => {
+      document.getElementsByTagName("html")[0].style.overflow = "hidden";
+
       let div = document.createElement("div");
       div.setAttribute("id", "productos");
       var listaProductos = document.createElement("ul");
@@ -112,6 +114,7 @@ function clickLi(element) {
       botonCerrar.addEventListener("click", function () {
         div.remove();
         divOscurecer.remove();
+        document.getElementsByTagName("html")[0].style.overflow = "auto";
       });
 
       // Agregar lista y botón al div

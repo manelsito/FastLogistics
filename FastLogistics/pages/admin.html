@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebPaneles</title>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"></script>
+  <script>
+    $(function() {
+      $(".sortable-item").draggable({
+        revert: "invalid",
+        helper: "clone"
+      });
+      $(".papelera-container").droppable({
+        tolerance: "intersect",
+        accept: ".sortable-item",
+        drop: function(event, ui) {
+          ui.draggable.remove();
+        }
+      });
+    });
+  </script>
+  <link rel="stylesheet" href="../styles/admin.css">
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.1/themes/smoothness/jquery-ui.css">
+</head>
+<body>
+  <body>
+    <div id="panel-container">
+      
+    </div>
+    
+    <script src="../js/admin.js"></script>
+</body>
+</html>
