@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio de sesión</title>
+    <link href="login.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body>
+    <div id="contenedor">
+        <div id="central">
+            <div id="login">
+                <div class="titulo">FastLogistics</div>
+                <form id="loginform" method="POST" action="/submit">
+                    <input id="usuario" type="text" name="usuario" placeholder="Usuario" required>
+                    <input id="password" type="password" placeholder="Contraseña" name="contra" required>
+                    <button id="submit" type="submit" title="Ingresar" name="enviar">Acceder</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

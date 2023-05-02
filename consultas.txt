@@ -1,0 +1,10 @@
+/*seleccionar todas las tareas de un user*/
+
+select * from tareas where idusuario = 2;
+
+
+/*seleccionar todos los productos de una tarea*/
+
+select productos.idproducto, productos.nombreProducto 
+from productos join productostareas on productostareas.idproducto = productos.idproducto
+where productostareas.idtarea = 4;
