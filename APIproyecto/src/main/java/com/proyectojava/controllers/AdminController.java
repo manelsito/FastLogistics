@@ -28,6 +28,13 @@ public class AdminController {
 	@ResponseBody
 	@PostMapping("/insertTask")
 	public boolean insertTask(@RequestBody ProductosTarea productosTarea) {
+		System.out.println(productosTarea);
+		return adminService.insertTask(productosTarea);
+	}
+	
+	@ResponseBody
+	@PostMapping("/insertTaskInUser")
+	public boolean insertTaskInUser(@RequestBody ProductosTarea productosTarea) {
 		return adminService.insertTask(productosTarea);
 	}
 	

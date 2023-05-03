@@ -50,6 +50,7 @@ INSERT INTO `usuarios` (`idusuario`, `usuario`, `passuser`,`type`, `nombre_emple
 (4, 'manuel_pretel', '123456', 2, 'Manuel Pretel'),
 (5, 'repartidor', '123', 2, 'repartidor'),
 (6, 'limpiador', '123', 3, 'limpiador'),
+(7, 'manel', 'manel', 2, 'Manel Agudo'),
 (12, 'prueba', 'prueba', 2, 'empleado');
 
 
@@ -67,14 +68,14 @@ INSERT INTO `tareas` (`idtarea`, `direccion`, `idusuario`) VALUES
 (11, 'Avenida 11, Ciudad 11', 5),
 (12, 'Carrera 12, Ciudad 12', 3),
 (13, 'Calle 13, Ciudad 13', 2),
-(14, 'Avenida 14, Ciudad 14', 2),
+(14, 'Avenida 14, Ciudad 14', 7),
 (15, 'Carrera 15, Ciudad 15', 3),
-(16, 'Calle 16, Ciudad 16', 2),
+(16, 'Calle 16, Ciudad 16', 7),
 (17, 'Avenida 17, Ciudad 17', 2),
 (18, 'Carrera 18, Ciudad 18', 3),
-(19, 'Calle 19, Ciudad 19', 5),
+(19, 'Calle 19, Ciudad 19', 7),
 (20, 'Avenida 20, Ciudad 20', 2),
-(21, 'Carrera 21, Ciudad 21', 3),
+(21, 'Carrera 21, Ciudad 21', 7),
 (22, 'Calle 22, Ciudad 22', 5),
 (23, 'Avenida 23, Ciudad 23', 2),
 (24, 'Carrera 24, Ciudad 24', 3),
@@ -163,16 +164,3 @@ VALUES (@idtarea, 1),
 
 COMMIT;
 */
-
-select * from tareas;
-select * from productostareas;
-
-select tareas.idtarea, tareas.direccion, tareas.finalizada, usuarios.idusuario, usuarios.usuario
-from tareas join usuarios on tareas.idusuario = usuarios.idusuario;
-
-select count(idusuario)
-from usuarios
-where type=2;
-
-SELECT * FROM usuarios u LEFT JOIN tareas t ON u.idusuario = t.idusuario WHERE type = 2 ORDER BY u.idusuario;
- 

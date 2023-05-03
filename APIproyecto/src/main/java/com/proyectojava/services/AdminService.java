@@ -34,10 +34,12 @@ public class AdminService {
 			@Override
 			protected void doInTransactionWithoutResult(TransactionStatus status) {
 				int contador = 0;
+				
+				System.out.println("userID: " + (productosTarea.getUserId() != -1 ? productosTarea.getUserId() : findUserIdWithFewestTasks(getAllTasks())));
 
 				String insertTareaSql = "INSERT INTO tareas (direccion, idusuario) VALUES (?, ?)";
 				jdbcTemplate.update(insertTareaSql, productosTarea.getTarea().getDireccion(),
-						findUserIdWithFewestTasks(getAllTasks()));
+						productosTarea.getUserId() != 0 ? productosTarea.getUserId() : findUserIdWithFewestTasks(getAllTasks()));
 
 				String lastInsertIdSql = "SELECT LAST_INSERT_ID()";
 				int idTarea = jdbcTemplate.queryForObject(lastInsertIdSql, Integer.class);
