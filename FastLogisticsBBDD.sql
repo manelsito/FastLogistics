@@ -15,7 +15,7 @@ CREATE TABLE `usuarios` (
   `usuario` varchar(100) NOT NULL,
   `passuser` varchar(100) NOT NULL,
   `type` int (1) NOT NULL,   /*1(admin), 2(repartidor), 3(limpiador)*/
-  `nombre_empleado` varchar(100) NOT NULL
+  `nombre_empleado` varchar(100) NOT NULL DEFAULT ''
 );
 
 CREATE TABLE `tareas`(
@@ -50,7 +50,7 @@ INSERT INTO `usuarios` (`idusuario`, `usuario`, `passuser`,`type`, `nombre_emple
 (4, 'manuel_pretel', '123456', 2, 'Manuel Pretel'),
 (5, 'repartidor', '123', 2, 'repartidor'),
 (6, 'limpiador', '123', 3, 'limpiador'),
-(7, 'manel', 'manel', 2, 'Manel Agudo'),
+(7, 'manel', 'manel', 3, 'Manel Agudo'),
 (12, 'prueba', 'prueba', 2, 'empleado');
 
 

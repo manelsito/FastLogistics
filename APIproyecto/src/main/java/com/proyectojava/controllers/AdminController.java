@@ -24,11 +24,16 @@ public class AdminController {
 
 	@Autowired
 	AdminService adminService;
+	
+	@ResponseBody
+	@PostMapping("/createUser")
+	public boolean createUser(@RequestBody Usuario usuario) {
+		return adminService.createUser(usuario);
+	}
 
 	@ResponseBody
 	@PostMapping("/insertTask")
 	public boolean insertTask(@RequestBody ProductosTarea productosTarea) {
-		System.out.println(productosTarea);
 		return adminService.insertTask(productosTarea);
 	}
 	

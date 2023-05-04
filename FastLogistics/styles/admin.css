@@ -1,16 +1,16 @@
-body{
+body {
   background: linear-gradient(white, #c7f4ff);
 }
 
-#panel-container{
+#panel-container {
   width: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-evenly;
   flex-wrap: wrap;
 }
 
-.panel{
+.panel {
   background-color: #fbc5bd;
   width: 300px;
   display: flex;
@@ -23,11 +23,11 @@ body{
   margin: 10px;
 }
 
-.titulo{
+.titulo {
   height: 20%;
 }
 
-.panel-body{
+.panel-body {
   height: 60%;
   display: flex;
   justify-content: center;
@@ -46,17 +46,13 @@ body{
   padding: 5px;
 }
 
-
-
-
-
-.sortable-list{
+.sortable-list {
   list-style: none;
   padding: 0;
   width: 70%;
 }
 
-.li-button{
+.li-button {
   padding: 5px;
   background-color: transparent;
   border: none;
@@ -64,31 +60,52 @@ body{
   width: 100%;
 }
 
-.li-button:hover{
+.li-button:hover {
   background-color: #ffa496;
 }
 
-.panel-footer{
+.panel-footer {
   height: 20%;
   display: flex;
   align-items: center;
   justify-content: center;
-
 }
 
-.button-add{
+.button-add {
   height: 50%;
   width: 50%;
   text-align: center;
   background-color: #4d8aff;
-  color:white;
+  color: white;
   border: none;
   border-radius: 10px;
 }
 
-.button-add:hover{
+.button-add:hover {
   background-color: #0f755c;
-  color:#bbe1fa;
+  color: #bbe1fa;
+}
+
+.addUser-container {
+  width: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+  margin: 10px;
+}
+
+.button-addUser {
+  padding: 0;
+  height: 90px;
+  width: 90px;
+  font-size: 80px;
+  background-color: transparent;
+  border: 3px solid black;
+}
+
+.button-addUser:hover {
+  background-color: #c2daf6;
 }
 
 #productos {
@@ -134,6 +151,28 @@ body{
   background-color: #3c6cb7;
 }
 
+.createUser-container {
+  height: 20vh;
+  width: 40vw;
+  position: fixed;
+  top: 40%;
+  left: 30%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: #d6e4f0;
+  border: 1px solid #4d82c4;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+}
+
+.inputs-container {
+  display: flex;
+  flex-direction: column;
+}
+
 #oscurecer {
   position: fixed;
   top: 0;
@@ -143,6 +182,3 @@ body{
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 1;
 }
-
-
-

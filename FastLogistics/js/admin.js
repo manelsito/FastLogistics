@@ -1,57 +1,3 @@
-// $(function () {
-//   $(".sortable-list")
-//     .sortable({
-//       connectWith: ".sortable-list",
-//       tolerance: "pointer",
-//       placeholder: "sortable-placeholder",
-//     })
-//     .disableSelection();
-
-//   $(".panel").on("click", ".panel-footer button", function () {
-//     var newItem = $("<li>")
-//       .addClass("sortable-item")
-//       .append("<input type='text'>")
-//       .appendTo($(this).closest(".panel").find(".sortable-list"));
-
-//     $(this).closest(".panel").find(".sortable-list").append(newItem);
-//   });
-
-//   $(".sortable-list").on("dragstart", ".sortable-item", function (event) {
-//     event.originalEvent.dataTransfer.setData("text", $(this).index());
-//   });
-
-//   $(".papelera").on("dragover dragenter", function (event) {
-//     event.preventDefault();
-//     $(this).addClass("papelera-hover");
-//   });
-
-//   $(".papelera").on("dragleave dragend", function (event) {
-//     $(this).removeClass("papelera-hover");
-//   });
-
-//   $(".papelera").on("drop", function (event) {
-//     event.preventDefault();
-//     var index = event.originalEvent.dataTransfer.getData("text");
-//     $(".sortable-item").eq(index).remove();
-//     $(this).removeClass("papelera-hover");
-//   });
-// });
-
-$(function () {
-  $(".sortable-list")
-    .sortable({
-      connectWith: ".sortable-list",
-      tolerance: "pointer",
-      placeholder: "sortable-placeholder",
-      receive: function (event, ui) {
-        $(this).append(ui.item);
-      },
-    })
-    .disableSelection();
-
-  // ... resto del código
-});
-
 fetch("http://localhost:8080/getAllUserTasks")
   .then((response) => {
     if (!response.ok) {
@@ -105,7 +51,7 @@ fetch("http://localhost:8080/getAllUserTasks")
       button.setAttribute("class", "button-add");
       button.textContent = "Añadir";
       button.onclick = function () {
-        agregarTarea(item.tareas, ul, item.user.idUser);
+        agregarTarea(panelBody, ul, item.user.idUser, button);
       };
 
       panelBody.appendChild(ul);
@@ -116,6 +62,28 @@ fetch("http://localhost:8080/getAllUserTasks")
       // Agregar el panel al contenedor
       panelContainer.appendChild(panel);
     });
+    //Despues del foreach agrego el crear user
+    const div = document.createElement("div");
+    div.setAttribute("class", "addUser-container");
+    //Crear boton
+    const btn = document.createElement("button");
+
+    // Asignar una clase
+    btn.setAttribute("class", "button-addUser");
+
+    // Agregar un evento de clic
+    btn.addEventListener("click", function () {
+      createUser();
+    });
+
+    // Crear un elemento de texto
+    const textNode = document.createTextNode("+");
+
+    // Agregar el elemento de texto al botón
+    btn.appendChild(textNode);
+
+    div.appendChild(btn);
+    panelContainer.appendChild(div);
   })
   .catch((error) => {
     console.error("Error en la solicitud:", error);
@@ -181,11 +149,18 @@ function tareaClick(element) {
     });
 }
 
-function agregarTarea(tareas, ul, userId) {
+function agregarTarea(panel, ul, userId, button) {
+  button.disabled = true;
+
   const nuevaTarea = document.createElement("input");
   nuevaTarea.setAttribute("type", "text");
   nuevaTarea.setAttribute("class", "nueva-tarea");
   ul.appendChild(nuevaTarea);
+
+  panel.scrollTo({
+    top: document.documentElement.scrollHeight,
+    behavior: "smooth",
+  });
 
   // Agregar un event listener al input de nueva tarea
   nuevaTarea.addEventListener("keyup", (event) => {
@@ -208,7 +183,7 @@ function agregarTarea(tareas, ul, userId) {
         tarea: {
           direccion: tareaNombre,
         },
-        productos: []
+        productos: [],
       };
 
       anadirTareaBBDD(data);
@@ -224,9 +199,6 @@ function agregarTarea(tareas, ul, userId) {
 }
 
 function anadirTareaBBDD(data) {
-
-console.log(data);
-
   fetch("http://localhost:8080/insertTaskInUser", {
     method: "POST",
     headers: {
@@ -241,9 +213,73 @@ console.log(data);
         throw new Error("Error en la solicitud POST"); // Maneja errores de la solicitud
       }
     })
-    .then((data) => {
-      
+    .catch((error) => {
+      console.error(error); // Maneja errores de la solicitud
+    });
+}
+
+function createUser() {
+  const div = document.createElement("div");
+  div.setAttribute("class", "createUser-container");
+
+  const divInputs = document.createElement("div");
+  divInputs.setAttribute("class", "inputs-container");
+
+  const userInput = document.createElement("input");
+  userInput.setAttribute("class", "user-input");
+  userInput.placeholder = "Usuario";
+  const passwordInput = document.createElement("input");
+  passwordInput.setAttribute("class", "password-input");
+  passwordInput.placeholder = "Contraseña";
+
+  const buttonSend = document.createElement("button");
+  buttonSend.textContent = "Enviar";
+  buttonSend.setAttribute("class", "button-sendUser");
+  buttonSend.onclick = function () {
+    if (
+      userInput.value.trim().length > 0 &&
+      passwordInput.value.trim().length > 0
+    ) {
+      const data = {
+        user: userInput.value,
+        password: passwordInput.value,
+      };
+
+      createUserBBDD(data);
+
+      location.reload();
+    }
+  };
+
+  divInputs.appendChild(userInput);
+  divInputs.appendChild(passwordInput);
+
+  div.appendChild(divInputs);
+  div.appendChild(buttonSend);
+
+  var body = document.querySelector("body");
+  var divOscurecer = document.createElement("div");
+  divOscurecer.setAttribute("id", "oscurecer");
+  body.appendChild(div);
+  body.appendChild(divOscurecer);
+}
+
+function createUserBBDD(data) {
+  fetch("http://localhost:8080/createUser", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json", // Establece el tipo de contenido a JSON
+    },
+    body: JSON.stringify(data), // Convierte el objeto de datos a una cadena JSON
+  })
+    .then((response) => {
+      if (response.ok) {
+        return response.json(); // Si la respuesta es exitosa, convierte la respuesta a JSON
+      } else {
+        throw new Error("Error en la solicitud POST"); // Maneja errores de la solicitud
+      }
     })
+    .then((data) => {})
     .catch((error) => {
       console.error(error); // Maneja errores de la solicitud
     });

@@ -27,6 +27,21 @@ public class AdminService {
 	@Autowired
 	private TransactionTemplate transactionTemplate;
 
+	public boolean createUser(Usuario usuario) {
+		boolean b = false;
+		String sql = "insert into usuarios (usuario, passuser, type) values(?, ?, 2);";
+
+		int resultado = jdbcTemplate.update(sql, usuario.getUser(), usuario.getPassword());
+
+		if (resultado == 1) {
+			b = true;
+		} else {
+			b = false;
+		}
+
+		return b;
+	}
+
 	public boolean insertTask(ProductosTarea productosTarea) {
 		boolean b = true;
 
@@ -34,12 +49,11 @@ public class AdminService {
 			@Override
 			protected void doInTransactionWithoutResult(TransactionStatus status) {
 				int contador = 0;
-				
-				System.out.println("userID: " + (productosTarea.getUserId() != -1 ? productosTarea.getUserId() : findUserIdWithFewestTasks(getAllTasks())));
 
 				String insertTareaSql = "INSERT INTO tareas (direccion, idusuario) VALUES (?, ?)";
 				jdbcTemplate.update(insertTareaSql, productosTarea.getTarea().getDireccion(),
-						productosTarea.getUserId() != 0 ? productosTarea.getUserId() : findUserIdWithFewestTasks(getAllTasks()));
+						productosTarea.getUserId() != 0 ? productosTarea.getUserId()
+								: findUserIdWithFewestTasks(getAllTasks()));
 
 				String lastInsertIdSql = "SELECT LAST_INSERT_ID()";
 				int idTarea = jdbcTemplate.queryForObject(lastInsertIdSql, Integer.class);
@@ -182,18 +196,21 @@ public class AdminService {
 			usuario.setPassword(rs.getString("u.passuser"));
 			usuario.setType(rs.getInt("u.type"));
 			usuario.setUserName(rs.getString("u.nombre_empleado"));
+			
+			List<Tarea> tareas = new ArrayList<>();
 
+			Tarea tarea = new Tarea();
 			if (rs.getInt("t.idtarea") != 0) {
-				Tarea tarea = new Tarea();
 				tarea.setIdTarea(rs.getInt("t.idtarea"));
 				tarea.setDireccion(rs.getString("t.direccion"));
 				tarea.setIdUsuario(rs.getInt("t.idusuario"));
 				tarea.setFinalizada(rs.getBoolean("t.finalizada"));
 
-				List<Tarea> tareas = mapTareas.getOrDefault(idUsuario, new ArrayList<>());
+				tareas = mapTareas.getOrDefault(idUsuario, new ArrayList<>());
 				tareas.add(tarea);
-				mapTareas.put(idUsuario, tareas);
 			}
+			mapTareas.put(idUsuario, tareas);
+
 		});
 
 		mapTareas.forEach((idUsuario, tareas) -> {
@@ -204,14 +221,14 @@ public class AdminService {
 
 		return usuariosTareas;
 	}
-	
+
 	public Usuario getUser(int userId) {
 
 		final String sql = "SELECT * FROM usuarios where idusuario = ?;";
 
 		List<Map<String, Object>> result = jdbcTemplate.queryForList(sql, userId);
 		Usuario usuario = new Usuario();
-		
+
 		for (Map<String, Object> row : result) {
 			usuario.setIdUser((int) row.get("idusuario"));
 			usuario.setUser((String) row.get("usuario"));
