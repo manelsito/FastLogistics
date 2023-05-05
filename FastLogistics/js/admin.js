@@ -390,16 +390,3 @@ function borrarTareaBBDD(idTarea) {
     });
 }
 
-
-// Seleccione todos los contenedores de lista de tareas
-const containers = document.querySelectorAll(".sortable-list");
-
-// Inicializar SortableJS en cada contenedor
-containers.forEach((container) => {
-  console.log("hola");
-  new Sortable(container, {
-    group: "tareas", // Identificador de grupo para que los elementos puedan ser arrastrados entre diferentes contenedores
-    animation: 150, // Duración de la animación en milisegundos
-  });
-});
-

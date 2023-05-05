@@ -1,89 +1,116 @@
-body {
-    font-family: 'Overpass', sans-serif;
-    font-weight: normal;
-    
-    margin: 0;
-    background-image: url("../images/flores.jpg");
-    background-size: cover;
-}
-
-#contenedor {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    
-    margin: 0;
-    padding: 0;
-    min-width: 100vw;
-    min-height: 100vh;
-    width: 100%;
+html {
     height: 100%;
+  }
+  body {
+    margin:0;
+    padding:0;
+    font-family: sans-serif;
+    background: linear-gradient(#ffffff, #c7f4ff);
+  }
+  #circulo{
+    position: absolute;
+    top: 35px;
+    left: 85px;
+    background: linear-gradient(to left, #4B85F5, #0f49bd);
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+}
+#punto-uno{
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background-color: #4B85F5;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    left: 277px;
+    top: 60px;
 }
 
-#central {
-    max-width: 320px;
-    width: 100%;
+  .login-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 400px;
+    padding: 40px;
+    transform: translate(-50%, -50%);
+    background: rgb(255, 255, 255);
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0,0,0,.6);
+    border-radius: 10px;
+    font-weight: bold;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
 }
-
-.titulo {
-    font-size: 250%;
-    color:#4d8aff;
+  
+  .login-box h2 {
+    margin: 0 0 30px;
+    padding: 0;
+    color: #000000;
     text-align: center;
-    margin-bottom: 20px;
-}
-
-#login {
+  }
+  
+  .login-box .user-box {
+    position: relative;
+  }
+  
+  .login-box .user-box input{
     width: 100%;
-    padding: 50px 30px;
-    background-color: #fcbdb5;
-    
-    -webkit-box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.15);
-    -moz-box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.15);
-    box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.15);
-    -webkit-border-radius: 10px;
-    
-    box-sizing: border-box;
-}
-
-#login input {
-    font-family: 'Overpass', sans-serif;
-    font-size: 110%;
-    color: #1b262c;
-    
-    display: block;
-    width: 100%;
-    height: 40px;
-    
-    margin-bottom: 10px;
-    padding: 5px 5px 5px 10px;
-    
-    box-sizing: border-box;
-    
+    padding: 10px 0;
+    font-size: 16px;
+    color: #000000;
+    margin-bottom: 30px;
     border: none;
-    -webkit-border-radius: 10px;
-}
-
-#login input::placeholder {
-    font-family: 'Overpass', sans-serif;
-    color: #e4e4e4;
-}
-
-#login button {
-    font-family: 'Overpass', sans-serif;
-    font-size: 110%;
-    color:white;
-    width: 100%;
-    height: 40px;
+    border-bottom: 1px solid #000000;
+    outline: none;
+    background-color: #f9ffff2c;
+  }
+  .login-box .user-box label {
+    position: absolute;
+    top:0;
+    left: 0;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #929292;
+    pointer-events: none;
+    transition: .5s;
+  }
+  
+  .login-box .user-box input:focus ~ label,
+  .login-box .user-box input:valid ~ label {
+    top: -20px;
+    left: 0;
+    color: #000000;
+    font-size: 12px;
+  }
+  
+  button {
+    position: relative;
+    left: 100px;
+    background-color: #26cfd8;
     border: none;
-
-    -webkit-border-radius: 10px;
-    
-    background-color: #4d8aff;
-    
-    margin-top: 10px;
-}
-
-#login button:hover {
-    background-color: #0f755c;
-    color:#bbe1fa;
-}
+    color: #333;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 5px;
+    box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+  }
+  
+  button:hover {
+    background-color: #b3f9ff;
+  }
+ 
+  

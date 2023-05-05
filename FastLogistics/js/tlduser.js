@@ -32,7 +32,7 @@ fetch("http://localhost:8080/getUsername/" + userID)
     return response.text(); // Parsear la respuesta como JSON
   })
   .then((data) => {
-    titulo.textContent = "Hola, " + data; // Acceder a los datos obtenidos de la API
+    titulo.textContent = data; // Acceder a los datos obtenidos de la API
   })
   .catch((error) => {
     console.error("Error en la solicitud:", error);
@@ -55,6 +55,8 @@ fetch("http://localhost:8080/getWorksByUser/" + userID)
       const checkbox = document.createElement("input");
       checkbox.type = "checkbox";
       checkbox.checked = tarea.finalizada;
+      checkbox.setAttribute("id","checkbox");
+
 
       // Establece el contenido del botón como el valor de 'direccion' en el objeto JSON
       listItem.textContent = tarea.direccion;
