@@ -9,7 +9,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import com.proyectojava.model.Producto;
-import com.proyectojava.model.ProductosTarea;
 import com.proyectojava.model.Tarea;
 
 @Service
@@ -34,7 +33,7 @@ public class UserService {
 
 	/**
 	 * get all the works of a user in the database
-	 * 
+	 *
 	 * @param idUser
 	 * @return the list of works
 	 */
@@ -59,7 +58,7 @@ public class UserService {
 
 	/**
 	 * get all the products of a user in a work
-	 * 
+	 *
 	 * @param idTask
 	 * @return the list of products
 	 */

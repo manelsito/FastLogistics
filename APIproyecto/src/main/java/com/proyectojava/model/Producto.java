@@ -15,7 +15,7 @@ public class Producto {
         this.nombreProducto = nombreProducto;
         this.descripcion = descripcion;
     }
-    
+
     public Producto(int idProducto) {
         this.idProducto = idProducto;
     }
@@ -50,6 +50,6 @@ public class Producto {
 		return "Producto [idProducto=" + idProducto + ", nombreProducto=" + nombreProducto + ", descripcion="
 				+ descripcion + "]";
 	}
-    
+
 }
 

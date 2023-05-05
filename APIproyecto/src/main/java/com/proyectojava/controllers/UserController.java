@@ -22,28 +22,28 @@ public class UserController {
 
 	@Autowired
 	UserService userService;
-	
+
 	@GetMapping("/getUsername/{userID}")
 	public String getUsername(@PathVariable int userID) {
 		return userService.getUsername(userID);
 	}
-	
-	
+
+
 	@GetMapping("/getWorksByUser/{idUser}")
     public List<Tarea> getWorks(@PathVariable int idUser){
 		return userService.findWorksForUser(idUser);
     }
-	
-	
+
+
 	@GetMapping("/getProductsByTask/{idTask}")
     public List<Producto> getProducts(@PathVariable int idTask){
 		return userService.findProductsByTask(idTask);
     }
-	
+
 	@PostMapping("/changeTaskState/{taskId}")
 	public boolean changeTaskState(@PathVariable int taskId) {
 		return userService.changeTaskState(taskId);
 	}
 
-	
+
 }

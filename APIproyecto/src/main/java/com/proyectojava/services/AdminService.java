@@ -196,7 +196,7 @@ public class AdminService {
 			usuario.setPassword(rs.getString("u.passuser"));
 			usuario.setType(rs.getInt("u.type"));
 			usuario.setUserName(rs.getString("u.nombre_empleado"));
-			
+
 			List<Tarea> tareas = new ArrayList<>();
 
 			Tarea tarea = new Tarea();

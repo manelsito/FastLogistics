@@ -34,57 +34,60 @@ CREATE TABLE `productostareas`(
 );
 
 INSERT INTO `productos` (`idproducto`, `nombreProducto`, `descripcion`) VALUES
-(1, 'Lejía', 'Producto desinfectante'),
-(2, 'Limpia cristales', 'Limpiador de cristales xD'),
-(3, 'Fregasuelos', 'Productos para limpiar manchas del suelo.'),
-(4, 'Cubos', 'Para llevar agüita.'),
-(5, 'Escoba', 'Para barrer mai frien.'),
-(6, 'Recogedor', 'Para recoger la basurita.'),
-(7, 'bayetas', 'Para limpiar superfícies.');
+(1, 'Detergente multiusos', 'Producto para limpiar varias superficies.'),
+(2, 'Limpiador de cristales', 'Producto para limpiar ventanas y espejos.'),
+(3, 'Desinfectante', 'Producto desinfectante para limpiar superficies.'),
+(4, 'Fregasuelos', 'Producto para limpiar el suelo.'),
+(5, 'Cepillo', 'Para limpiar manchas difíciles en superficies duras.'),
+(6, 'Bayetas de microfibra', 'Para limpiar y secar varias superficies.'),
+(7, 'Quitamanchas', 'Producto para eliminar manchas en telas.'),
+(8, 'Desatascador', 'Para desatascar tuberías y desagües.'),
+(9, 'Ambientador', 'Para perfumar y refrescar el ambiente.');
+
 
 
 INSERT INTO `usuarios` (`idusuario`, `usuario`, `passuser`,`type`, `nombre_empleado`) VALUES
 (1, 'admin', 'admin', 1, 'admin'),
-(2, 'pol_lozano', '1234', 2, 'Pol Lozano'),
-(3, 'eric_muntane', '12345', 2, 'Eric Muntane'),
-(4, 'manuel_pretel', '123456', 2, 'Manuel Pretel'),
+(2, 'pol', '1234', 2, 'Pol Lozano'),
+(3, 'eric', '12345', 2, 'Eric Muntane'),
+(4, 'manuel', '123456', 2, 'Manuel Pretel'),
 (5, 'repartidor', '123', 2, 'repartidor'),
 (6, 'limpiador', '123', 3, 'limpiador'),
-(7, 'manel', 'manel', 3, 'Manel Agudo'),
-(12, 'prueba', 'prueba', 2, 'empleado');
+(7, 'manel', 'manel', 3, 'Manel Agudo');
 
 
 INSERT INTO `tareas` (`idtarea`, `direccion`, `idusuario`) VALUES
-(1, 'Calle 1, Ciudad 1', 5),
-(2, 'Avenida 2, Ciudad 2', 2),
-(3, 'Carrera 3, Ciudad 3', 3),
-(4, 'Calle 4, Ciudad 4', 5),
-(5, 'Avenida 5, Ciudad 5', 2),
-(6, 'Carrera 6, Ciudad 6', 3),
-(7, 'Calle 7, Ciudad 7', 5),
-(8, 'Avenida 8, Ciudad 8', 2),
-(9, 'Carrera 9, Ciudad 9', 3),
-(10, 'Calle 10, Ciudad 10', 5),
-(11, 'Avenida 11, Ciudad 11', 5),
-(12, 'Carrera 12, Ciudad 12', 3),
-(13, 'Calle 13, Ciudad 13', 2),
-(14, 'Avenida 14, Ciudad 14', 7),
-(15, 'Carrera 15, Ciudad 15', 3),
-(16, 'Calle 16, Ciudad 16', 7),
-(17, 'Avenida 17, Ciudad 17', 2),
-(18, 'Carrera 18, Ciudad 18', 3),
-(19, 'Calle 19, Ciudad 19', 7),
-(20, 'Avenida 20, Ciudad 20', 2),
-(21, 'Carrera 21, Ciudad 21', 7),
-(22, 'Calle 22, Ciudad 22', 5),
-(23, 'Avenida 23, Ciudad 23', 2),
-(24, 'Carrera 24, Ciudad 24', 3),
-(25, 'Calle 25, Ciudad 25', 5),
-(26, 'Avenida 26, Ciudad 26', 2),
-(27, 'Carrera 27, Ciudad 27', 3),
-(28, 'Calle 28, Ciudad 28', 5),
-(29, 'Avenida 29, Ciudad 29', 2),
-(30, 'Carrera 30, Ciudad 30', 3);
+(1, 'Carrer del Rosselló, 123', 5),
+(2, 'Avinguda Diagonal, 678', 2),
+(3, 'Carrer de la Marina, 456', 3),
+(4, 'Carrer de Balmes, 789', 5),
+(5, 'Passeig de Gràcia, 1011', 2),
+(6, 'Carrer de la Rambla, 1213', 3),
+(7, 'Carrer de Muntaner, 1415', 5),
+(8, 'Avinguda Meridiana, 1617', 2),
+(9, 'Carrer de Sants, 1819', 3),
+(10, 'Carrer de Gracia, 2021', 4),
+(11, 'Avinguda del Paral·lel, 2223', 4),
+(12, 'Carrer de Mallorca, 2425', 4),
+(13, 'Carrer de Pau Claris, 2627', 2),
+(14, 'Avinguda del Tibidabo, 2829', 7),
+(15, 'Carrer de Diputació, 3031', 3),
+(16, 'Carrer de Balmes, 3233', 7),
+(17, "Avinguda del Portal de l'Angel, 3435", 2),
+(18, 'Carrer de Tarragona, 3637', 3),
+(19, 'Carrer del Consell de Cent, 3839', 7),
+(20, 'Avinguda de la Merce, 4041', 2),
+(21, 'Carrer de Valencia, 4243', 7),
+(22, 'Carrer de la Diputació, 4445', 5),
+(23, 'Avinguda de la Diagonal, 4647', 2),
+(24, 'Carrer de la Gran Via, 4849', 3),
+(25, 'Carrer de Balmes, 5051', 5),
+(26, 'Passeig de Sant Joan, 5253', 2),
+(27, 'Carrer del Pintor Fortuny, 5455', 3),
+(28, "Carrer de l'Hospital, 5657", 5),
+(29, 'Carrer de Roger de Flor, 5859', 2),
+(30, 'Carrer de la Marina, 6061', 3);
+
 
 
 INSERT INTO `productostareas` (`idtarea`,  `idproducto`) VALUES

@@ -107,8 +107,8 @@ function tareaClick(element) {
       let div = document.createElement("div");
       div.setAttribute("id", "productos");
       element.finalizada
-        ? (div.style.backgroundColor = "#a7f8ba")
-        : (div.style.backgroundColor = "#fe7474");
+        ? (div.style.borderColor = "#a7f8ba")
+        : (div.style.borderColor = "#fe7474");
       var listaProductos = document.createElement("ul");
       listaProductos.setAttribute("id", "lista_productos");
 
@@ -125,9 +125,12 @@ function tareaClick(element) {
         listaProductos.appendChild(productoEnLaLista);
       });
 
+      const botones = document.createElement("div");
+      botones.setAttribute("class", "buttons-popup");
+
       // Agregar botón para cerrar el div
       var botonCerrar = document.createElement("button");
-      botonCerrar.setAttribute("id", "boton_cerrar");
+      botonCerrar.setAttribute("id", "boton-cerrar");
       botonCerrar.textContent = "Cerrar";
       botonCerrar.addEventListener("click", function () {
         div.remove();
@@ -135,9 +138,28 @@ function tareaClick(element) {
         document.getElementsByTagName("html")[0].style.overflow = "auto";
       });
 
+      var botonBorrar = document.createElement("button");
+      botonBorrar.setAttribute("id", "boton-borrar");
+      botonBorrar.textContent = "Eliminar";
+      botonBorrar.addEventListener("click", function () {
+        console.log(element.finalizada);
+        if (element.finalizada) {
+          borrarTareaBBDD(element.idTarea);
+          location.reload();
+        } else {
+          advertencia(
+            "Seguro que quieres borrar esta tarea? No esta finalizada.",
+            element.idTarea
+          );
+        }
+      });
+
+      botones.appendChild(botonCerrar);
+      botones.appendChild(botonBorrar);
+
       // Agregar lista y botón al div
       div.appendChild(listaProductos);
-      div.appendChild(botonCerrar);
+      div.appendChild(botones);
 
       var divListas = document.querySelector("body");
       divListas.appendChild(div);
@@ -222,6 +244,27 @@ function createUser() {
   const div = document.createElement("div");
   div.setAttribute("class", "createUser-container");
 
+  const divTitulo = document.createElement("div");
+  divTitulo.setAttribute("class", "container-titulo-createUser");
+
+  const titulo = document.createElement("h3");
+  titulo.setAttribute("class", "titulo-createUser");
+  titulo.textContent = "Crear usuario";
+
+  const botonCerrar = document.createElement("button");
+  botonCerrar.setAttribute("class", "cerrar-createUser");
+  botonCerrar.textContent = "x";
+  botonCerrar.onclick = function(){
+    div.remove();
+    oscurecer.remove()
+  }
+
+  divTitulo.appendChild(titulo);
+  divTitulo.appendChild(botonCerrar);
+
+  const divContent = document.createElement("div");
+  divContent.setAttribute("class", "content-createUser")
+
   const divInputs = document.createElement("div");
   divInputs.setAttribute("class", "inputs-container");
 
@@ -254,8 +297,11 @@ function createUser() {
   divInputs.appendChild(userInput);
   divInputs.appendChild(passwordInput);
 
-  div.appendChild(divInputs);
-  div.appendChild(buttonSend);
+  divContent.appendChild(divInputs);
+  divContent.appendChild(buttonSend);
+
+  div.appendChild(divTitulo);
+  div.appendChild(divContent);
 
   var body = document.querySelector("body");
   var divOscurecer = document.createElement("div");
@@ -284,3 +330,76 @@ function createUserBBDD(data) {
       console.error(error); // Maneja errores de la solicitud
     });
 }
+
+async function advertencia(mensaje, tareaId) {
+  const oscurecer = document.getElementById("oscurecer");
+  oscurecer.style.zIndex = 1001;
+  // Crear un nuevo elemento div
+  const miDiv = document.createElement("div");
+  miDiv.setAttribute("class", "container-advertencia");
+
+  // Añadir texto al div
+  const msj = document.createTextNode(mensaje);
+  miDiv.appendChild(msj);
+
+  const botones = document.createElement("div");
+  botones.setAttribute("class", "buttons-popup");
+
+  // Crear los botones
+  const siBtn = document.createElement("button");
+  siBtn.setAttribute("class", "si-button");
+  siBtn.innerHTML = "Sí";
+  siBtn.onclick = function () {
+    borrarTareaBBDD(tareaId);
+
+    location.reload();
+  };
+
+  const noBtn = document.createElement("button");
+  noBtn.setAttribute("class", "no-button");
+  noBtn.innerHTML = "No";
+  noBtn.onclick = function () {
+    oscurecer.style.zIndex = 1;
+    miDiv.remove();
+  };
+
+  // Añadir los botones al div
+  botones.appendChild(siBtn);
+  botones.appendChild(noBtn);
+
+  miDiv.appendChild(botones);
+
+  // Añadir el div al DOM
+  document.body.appendChild(miDiv);
+}
+
+function borrarTareaBBDD(idTarea) {
+  fetch("http://localhost:8080/deleteTask/" + idTarea, {
+    method: "POST",
+  })
+    .then((response) => {
+      if (response.ok) {
+        return response.json(); // Si la respuesta es exitosa, convierte la respuesta a JSON
+      } else {
+        throw new Error("Error en la solicitud POST"); // Maneja errores de la solicitud
+      }
+    })
+    .then((data) => {})
+    .catch((error) => {
+      console.error(error); // Maneja errores de la solicitud
+    });
+}
+
+
+// Seleccione todos los contenedores de lista de tareas
+const containers = document.querySelectorAll(".sortable-list");
+
+// Inicializar SortableJS en cada contenedor
+containers.forEach((container) => {
+  console.log("hola");
+  new Sortable(container, {
+    group: "tareas", // Identificador de grupo para que los elementos puedan ser arrastrados entre diferentes contenedores
+    animation: 150, // Duración de la animación en milisegundos
+  });
+});
+

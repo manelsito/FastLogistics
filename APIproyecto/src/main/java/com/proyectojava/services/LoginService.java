@@ -22,21 +22,21 @@ public class LoginService {
 		int idUsuario;
 
 		final String sql = "SELECT idusuario FROM usuarios where usuario = ? and passuser = ?;";
-		
+
 		List<Map<String, Object>> result = jdbcTemplate.queryForList(sql, username, password);
-		if (!result.isEmpty()) { 
-			Map<String, Object> firstRow = result.get(0); 
+		if (!result.isEmpty()) {
+			Map<String, Object> firstRow = result.get(0);
 			idUsuario = (Integer) firstRow.get("idusuario");
 		}
 		else {
 			idUsuario = -1;
 		}
-		
+
 		return idUsuario;
 	}
-	
+
 	public int getUserType(int userId) {
-		
+
 		int respuesta = 1;
 
 		final String sql = "SELECT type FROM usuarios where idusuario = ?;";

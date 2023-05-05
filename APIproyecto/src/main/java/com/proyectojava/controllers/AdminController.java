@@ -24,7 +24,7 @@ public class AdminController {
 
 	@Autowired
 	AdminService adminService;
-	
+
 	@ResponseBody
 	@PostMapping("/createUser")
 	public boolean createUser(@RequestBody Usuario usuario) {
@@ -36,45 +36,45 @@ public class AdminController {
 	public boolean insertTask(@RequestBody ProductosTarea productosTarea) {
 		return adminService.insertTask(productosTarea);
 	}
-	
+
 	@ResponseBody
 	@PostMapping("/insertTaskInUser")
 	public boolean insertTaskInUser(@RequestBody ProductosTarea productosTarea) {
 		return adminService.insertTask(productosTarea);
 	}
-	
+
 	@ResponseBody
 	@PostMapping("/addProducts")
 	public boolean insertProducts(@RequestBody ProductosTarea productosTarea) {
 		return adminService.addProducts(productosTarea);
 	}
-	
+
 	@ResponseBody
 	@PostMapping("/updateProducts")
 	public boolean updateProducts(@RequestBody ProductosTarea productosTarea) {
 		return adminService.updateProducts(productosTarea);
 	}
-	
+
 	@PostMapping("/deleteTask/{taskId}")
 	public boolean deleteTask(@PathVariable int taskId) {
 		return adminService.deleteTask(taskId);
 	}
-	
+
 	@GetMapping("/getAllUsers")
 	public List<Usuario> getAllUsers() {
 		return adminService.getAllUsers();
 	}
-	
+
 	@GetMapping("/getAllProducts")
 	public List<Producto> getAllProducts() {
 		return adminService.getAllProducts();
 	}
-	
+
 	@GetMapping("/getAllTasks")
 	public List<Tarea> getAllTasks() {
 		return adminService.getAllTasks();
 	}
-	
+
 	@GetMapping("/getAllUserTasks")
 	public List<UsuarioTareas> getAllUserTasks() {
 		return adminService.getAllUserTasks();

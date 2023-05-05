@@ -25,10 +25,10 @@ public class LoginController {
 	public int login(@RequestBody Usuario user) {
 		return loginService.login(user.getUser(), user.getPassword());
 	}
-	
+
 	@GetMapping("/getUserType/{userID}")
 	public int getUserType(@PathVariable int userID) {
 		return loginService.getUserType(userID);
 	}
-	
+
 }
