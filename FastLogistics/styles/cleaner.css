@@ -15,23 +15,77 @@ header:after {
   clear: both;
 }
 body {
-  background-image: url("../images/flores.jpg");
-  background-size: cover;
-  overflow-x: hidden;
+  height: 100%;
+  background: linear-gradient(#ffffff, #c7f4ff);
+  background-attachment: fixed;
+}
+
+
+#circulo{
+  position: absolute;
+  top: 15px;
+  left: 25px;
+  background: linear-gradient(to left, #4B85F5, #0f49bd);
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+}
+#punto-uno{
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background-color: #4B85F5;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  left: 200px;
+  top: 40px;
+}
+
+#logo{
+  position: absolute;
+  left: 65px;
+  top: 20px;
+}
+#titulo{
+  position: absolute;
+  font-size: small;
+  top: 50px;
+  left: 100px;
 }
 
 #cerrarSesion {
   position: fixed;
   top: 20px;
   right: 20px;
-  width: 60px;
-  height: 60px;
-  background: #4d8aff;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
   align-items: center;
-  border-radius: 10px;
+  background: #ffffff;
+  border: 0 solid #d1d3d7;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  box-sizing: border-box;
+  color: #000000;
+  display: inline-flex;
+  font-family: Inter, sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  height: 56px;
+  justify-content: center;
+  line-height: 24px;
+  overflow-wrap: break-word;
+  padding: 24px;
+  text-decoration: none;
+  width: auto;
+  border-radius: 8px;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
 }
 
 #cerrarSesion img {
@@ -53,6 +107,7 @@ body {
 #direcciones,
 #direccion-input {
   position: absolute;
+  text-align: center;
 }
 
 .select-container {
@@ -120,15 +175,16 @@ option {
   padding: 10px 20px;
   border: solid black 1px;
   border-radius: 5px;
-  background-color: #fbc5bd;
-  color: black;
+  background-color: #1438ba;
+  color: rgb(255, 255, 255);
   font-size: 16px;
   cursor: pointer;
 }
 
 #enviar:hover,
 #cambiarDireccion:hover{
-  background-color: #ffdfda;
+  background-color: #a8c2ff;
+  color: #000000;
 }
 
 .select-container {
@@ -141,8 +197,10 @@ option {
 }
 
 .productos-seleccionados {
+  position: relative;
+  top: 35%;
   border: 1px solid black;
-  height: 50vh;
+  height: 70vh;
   width: 30vw;
   background-color: rgba(255, 255, 255, 0.4);
   border-radius: 10%;

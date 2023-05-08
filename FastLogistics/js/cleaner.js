@@ -1,4 +1,6 @@
 const productos = document.getElementById("lista-productos");
+var userID = localStorage.getItem("userid");
+
 
 //SELECTORES
 const selectorProducto = document.getElementById("productos");
@@ -20,6 +22,12 @@ cerrarSesion.addEventListener("click", (e) => {
   location.href = "../pages/loginscreen.html";
 });
 
+
+cerrarSesion.addEventListener("click", (e) => {
+  localStorage.removeItem("userid");
+  location.href = "../pages/loginscreen.html";
+});
+
 //NOMBRE DE USUARIO
 fetch("http://localhost:8080/getUsername/" + userID)
   .then((response) => {
@@ -29,7 +37,7 @@ fetch("http://localhost:8080/getUsername/" + userID)
     return response.text(); // Parsear la respuesta como JSON
   })
   .then((data) => {
-    titulo.textContent = "Hola, " + data; // Acceder a los datos obtenidos de la API
+    titulo.textContent = data; // Acceder a los datos obtenidos de la API
   })
   .catch((error) => {
     console.error("Error en la solicitud:", error);
