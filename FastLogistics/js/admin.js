@@ -1,3 +1,10 @@
+var userID = localStorage.getItem("userid");
+
+cerrarSesion.addEventListener("click", (e) => {
+  localStorage.removeItem("userid");
+  location.href = "../pages/loginscreen.html";
+});
+
 fetch("http://localhost:8080/getAllUserTasks")
   .then((response) => {
     if (!response.ok) {
@@ -177,6 +184,12 @@ function agregarTarea(panel, ul, userId, button) {
   const nuevaTarea = document.createElement("input");
   nuevaTarea.setAttribute("type", "text");
   nuevaTarea.setAttribute("class", "nueva-tarea");
+  nuevaTarea.setAttribute("autofocus", "");
+  nuevaTarea.addEventListener("keydown", function (event) {
+    if (event.key === "Escape") {
+      nuevaTarea.remove();
+    }
+  });
   ul.appendChild(nuevaTarea);
 
   panel.scrollTo({

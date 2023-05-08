@@ -15,9 +15,8 @@ header:after {
   display: table;
   clear: both;
 }
-body,html {
-  height: 100%;
-  background: linear-gradient(#ffffff, #c7f4ff);
+body{
+  background: linear-gradient(#ffffff, #c7f4ff) fixed;
 }
 
 
@@ -64,25 +63,6 @@ body,html {
 section::-webkit-scrollbar {
   display: none;
  }
-
-#cerrarSesion {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  width: 60px;
-  height: 60px;
-  background: #4d8aff;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 10px;
-}
-
-#cerrarSesion img {
-  width: 80%;
-  opacity: 0.7;
-}
 
 #listas {
   position: relative;
@@ -160,6 +140,13 @@ section::-webkit-scrollbar {
   flex-direction: column;
   align-items: center;
   width: 90%;
+  height: 75%;
+  overflow-y: scroll;
+}
+
+#lista_productos::-webkit-scrollbar {
+  width: 10px;
+  padding: 5px;
 }
 
 #lista_productos li {
@@ -197,6 +184,9 @@ section::-webkit-scrollbar {
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
+  position: fixed;
+  top: 20px;
+  right: 20px;
 }
 #oscurecer {
   position: fixed;
@@ -217,10 +207,6 @@ section::-webkit-scrollbar {
   margin-top: 10px;
   cursor: pointer;
   font-size: 16px;
-  background-image: url('ruta-de-la-imagen.png'); /* Agregar imagen de fondo */
-  background-repeat: no-repeat; /* Evita la repetición de la imagen */
-  background-size: contain; /* Ajusta el tamaño de la imagen */
-  background-position: center center; /* Centra la imagen en el botón */
 }
 
 #boton_cerrar:hover {

@@ -206,6 +206,11 @@ option {
   border-radius: 10%;
   display: flex;
   justify-content: center;
+  overflow-y: scroll;
+}
+
+.productos-seleccionados::-webkit-scrollbar {
+  width: 0;
 }
 
 #boton-producto {

@@ -1,7 +1,6 @@
 const productos = document.getElementById("lista-productos");
 var userID = localStorage.getItem("userid");
 
-
 //SELECTORES
 const selectorProducto = document.getElementById("productos");
 const selectorDireccion = document.getElementById("direcciones");
@@ -21,7 +20,6 @@ cerrarSesion.addEventListener("click", (e) => {
   localStorage.removeItem("userid");
   location.href = "../pages/loginscreen.html";
 });
-
 
 cerrarSesion.addEventListener("click", (e) => {
   localStorage.removeItem("userid");
@@ -89,13 +87,13 @@ fetch("http://localhost:8080/getAllTasks")
 
 botonEnviar.addEventListener("click", (e) => {
   if (verificarSeleccion()) {
-    const productos = getProductosLista();
+    const productosLista = getProductosLista();
     if (direccionEscrita) {
       const data = {
         tarea: {
           direccion: direccionInput.value,
         },
-        productos,
+        productos: productosLista,
       };
       anadirProductos(
         "http://localhost:8080/insertTask",
@@ -107,7 +105,7 @@ botonEnviar.addEventListener("click", (e) => {
         tarea: {
           idTarea: selectorDireccion.value,
         },
-        productos,
+        productos: productosLista,
       };
       anadirProductos(
         "http://localhost:8080/addProducts",
@@ -115,6 +113,8 @@ botonEnviar.addEventListener("click", (e) => {
         "Productos añadidos correctamente"
       );
     }
+    //Vacio la lista
+    productos.innerHTML = "";
   }
 });
 

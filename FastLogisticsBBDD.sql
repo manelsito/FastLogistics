@@ -49,11 +49,10 @@ INSERT INTO `productos` (`idproducto`, `nombreProducto`, `descripcion`) VALUES
 INSERT INTO `usuarios` (`idusuario`, `usuario`, `passuser`,`type`, `nombre_empleado`) VALUES
 (1, 'admin', 'admin', 1, 'admin'),
 (2, 'pol', '1234', 2, 'Pol Lozano'),
-(3, 'eric', '12345', 2, 'Eric Muntane'),
+(3, 'manel', '12345', 2, 'Manel Agudo'),
 (4, 'manuel', '123456', 2, 'Manuel Pretel'),
 (5, 'repartidor', '123', 2, 'repartidor'),
-(6, 'limpiador', '123', 3, 'limpiador'),
-(7, 'manel', 'manel', 3, 'Manel Agudo');
+(6, 'limpiador', '123', 3, 'limpiador');
 
 
 INSERT INTO `tareas` (`idtarea`, `direccion`, `idusuario`) VALUES
