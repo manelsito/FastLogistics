@@ -52,7 +52,8 @@ public class AdminService {
 
 				String insertTareaSql = "INSERT INTO tareas (direccion, idusuario) VALUES (?, ?)";
 				jdbcTemplate.update(insertTareaSql, productosTarea.getTarea().getDireccion(),
-						findUserIdWithFewestTasks(getAllTasks()));
+						productosTarea.getUserId() != 0 ? productosTarea.getUserId()
+								: findUserIdWithFewestTasks(getAllTasks()));
 
 				String lastInsertIdSql = "SELECT LAST_INSERT_ID()";
 				int idTarea = jdbcTemplate.queryForObject(lastInsertIdSql, Integer.class);
